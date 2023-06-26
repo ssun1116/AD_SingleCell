@@ -6,11 +6,11 @@ library(dplyr)
 library(harmony)
 library(cowplot)
 
-fs.list = readRDS('Seurat_Individual_SoupX_0622.RDS')
+fs.list = readRDS('Data/Seurat_Individual_SoupX_Doublet_0626.RDS')
 
 ## Sampling cells - for identical number of cells per sample
 fs.list2 = list()
-sample.size = 7000
+sample.size = 7500
 set.seed(111)
 for (file in c("el01", "el02", "el03", "el04")){
   obj = fs.list[[file]]
@@ -32,8 +32,13 @@ merged <- merged %>% RunHarmony("orig.ident", plot_convergence = TRUE) %>%
   FindNeighbors(reduction = "harmony", dims = 1:5) %>%
   FindClusters(resolution = 0.4)
 
-DimPlot(object = merged, reduction = "umap", pt.size = .1, group.by = "orig.ident")
-saveRDS(merged, "Data/data_harmony_SoupX_Sampled_0622.RDS")
+merged@meta.data$Doublet = coalesce(merged@meta.data$DF.classifications_0.25_21_601, 
+                                    merged@meta.data$DF.classifications_0.25_2_510, 
+                                    merged@meta.data$DF.classifications_0.25_2_498, 
+                                    merged@meta.data$DF.classifications_0.25_32_612)
+table(merged@meta.data$Doublet)
+p1 = DimPlot(object = merged, reduction = "umap", pt.size = .1, group.by = "Doublet")
+saveRDS(merged, "Data/data_harmony_SoupX_Doublet_Sampled_0626.RDS")
 
 
 ## Integrate 
@@ -47,15 +52,20 @@ combined <- FindNeighbors(combined, dims = 1:5)
 combined <- FindClusters(combined, resolution = 0.5)
 combined <- RunUMAP(combined, dims = 1:5)
 
-DimPlot(object = combined, reduction = "umap", pt.size = .1, group.by = "orig.ident")
+combined@meta.data$Doublet = coalesce(combined@meta.data$DF.classifications_0.25_21_601, 
+                                      combined@meta.data$DF.classifications_0.25_2_510, 
+                                      combined@meta.data$DF.classifications_0.25_2_498, 
+                                      combined@meta.data$DF.classifications_0.25_32_612)
+table(combined@meta.data$Doublet)
+p2 = DimPlot(object = combined, reduction = "umap", pt.size = .1, group.by = "Doublet")
 
-#saveRDS(combined, "Data/data_combined_SoupX_Sampled_0622.RDS")
+DefaultAssay(combined) = "RNA"
+saveRDS(combined, "Data/data_combined_SoupX_Doublet_Sampled_0626.RDS")
 
 
 ## DimPlot
 p1 = DimPlot(combined, group.by = "orig.ident", pt.size = .1)
 p2 = DimPlot(merged, group.by = "orig.ident", pt.size = .1)
-
 p = plot_grid(p1, p2, ncol = 2)
 
 ggsave(p, file = "Seurat_integrate_SoupX.pdf", width = 12, height = 5)

@@ -7,10 +7,15 @@ library(harmony)
 library(cowplot)
 
 fs.list = readRDS('Data/Seurat_Individual_SoupX_Doublet_0626.RDS')
+fs.list[["el01"]] = subset(fs.list[["el01"]], subset = DF.classifications_0.25_21_601 != "Doublet")
+fs.list[["el02"]] = subset(fs.list[["el02"]], subset = DF.classifications_0.25_2_510 != "Doublet")
+fs.list[["el03"]] = subset(fs.list[["el03"]], subset = DF.classifications_0.25_2_498 != "Doublet")
+fs.list[["el04"]] = subset(fs.list[["el04"]], subset = DF.classifications_0.25_32_612 != "Doublet")
+
 
 ## Sampling cells - for identical number of cells per sample
 fs.list2 = list()
-sample.size = 7500
+sample.size = 7000
 set.seed(111)
 for (file in c("el01", "el02", "el03", "el04")){
   obj = fs.list[[file]]
@@ -27,17 +32,14 @@ merged <- FindVariableFeatures(merged, selection.method = "vst", nfeatures = 200
 all.genes <- rownames(merged) # Scale data using all genes
 merged <- ScaleData(merged, features = all.genes)
 merged <- RunPCA(merged, features = VariableFeatures(object = merged))
-merged <- merged %>% RunHarmony("orig.ident", plot_convergence = TRUE) %>%
-  RunUMAP(reduction = "harmony", dims = 1:5, min.dist = 0.3) %>%
-  FindNeighbors(reduction = "harmony", dims = 1:5) %>%
-  FindClusters(resolution = 0.4)
+merged <- merged %>% RunHarmony("orig.ident", plot_convergence = TRUE) 
 
-merged@meta.data$Doublet = coalesce(merged@meta.data$DF.classifications_0.25_21_601, 
-                                    merged@meta.data$DF.classifications_0.25_2_510, 
-                                    merged@meta.data$DF.classifications_0.25_2_498, 
-                                    merged@meta.data$DF.classifications_0.25_32_612)
-table(merged@meta.data$Doublet)
-p1 = DimPlot(object = merged, reduction = "umap", pt.size = .1, group.by = "Doublet")
+merged <- RunUMAP(merged, reduction = "harmony", dims = 1:5, min.dist = 0.3) 
+merged <- FindNeighbors(merged, reduction = "harmony", dims = 1:5)
+merged <- FindClusters(merged, resolution = 0.4)
+
+DimPlot(object = merged, reduction = "umap", pt.size = .1)
+
 saveRDS(merged, "Data/data_harmony_SoupX_Doublet_Sampled_0626.RDS")
 
 
@@ -49,24 +51,18 @@ DefaultAssay(combined) <- "integrated"
 combined <- ScaleData(combined, verbose = FALSE)
 combined <- RunPCA(combined, npcs = 30, verbose = FALSE)
 combined <- FindNeighbors(combined, dims = 1:5)
-combined <- FindClusters(combined, resolution = 0.5)
+combined <- FindClusters(combined, resolution = 1.0)
 combined <- RunUMAP(combined, dims = 1:5)
 
-combined@meta.data$Doublet = coalesce(combined@meta.data$DF.classifications_0.25_21_601, 
-                                      combined@meta.data$DF.classifications_0.25_2_510, 
-                                      combined@meta.data$DF.classifications_0.25_2_498, 
-                                      combined@meta.data$DF.classifications_0.25_32_612)
-table(combined@meta.data$Doublet)
-p2 = DimPlot(object = combined, reduction = "umap", pt.size = .1, group.by = "Doublet")
-
+DimPlot(object = combined, reduction = "umap", pt.size = .1)
 DefaultAssay(combined) = "RNA"
 saveRDS(combined, "Data/data_combined_SoupX_Doublet_Sampled_0626.RDS")
 
 
 ## DimPlot
-p1 = DimPlot(combined, group.by = "orig.ident", pt.size = .1)
-p2 = DimPlot(merged, group.by = "orig.ident", pt.size = .1)
-p = plot_grid(p1, p2, ncol = 2)
+p1 = DimPlot(merged, group.by = "orig.ident", pt.size = .1)
+p2 = DimPlot(combined, group.by = "orig.ident", pt.size = .1)
+plot_grid(p1, p2, ncol = 2, labels = c("Harmony", "IntegrateAnchors"))
 
 ggsave(p, file = "Seurat_integrate_SoupX.pdf", width = 12, height = 5)
 

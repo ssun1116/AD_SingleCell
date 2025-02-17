@@ -8,9 +8,8 @@ library(cowplot)
 library(scRNAseq)
 library(scuttle)
 library(SingleR)
-setwd("~/Dropbox/ANGPT2_AD_v2/")
 
-combined = readRDS("Data/Seurat_Combined_DecontX_batch2_0209.RDS")
+combined = readRDS("Data/Seurat_Combined_DecontX_batch2.RDS")
 combined.se = as.SingleCellExperiment(combined)
 
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
@@ -57,7 +56,7 @@ p_2 = plot_grid(p4, p1, rel_widths = c(1.25, 1))
 p = plot_grid(p_1, p_2, ncol = 1)
 ggsave(p, file = "Figures/DimPlot_Seurat_Combined_SingleR_Result_Batch2.pdf", width = 14, height = 10)
 
-saveRDS(combined, "Data/Seurat_Combined_DecontX_Annotated_batch2_0209.RDS")
+saveRDS(combined, "Data/Seurat_Combined_DecontX_Annotated_batch2.RDS")
 
 ## StackedPlot
 p1 = ggplot(combined@meta.data, aes(x=seurat_clusters, fill=ziesel)) + 
@@ -98,7 +97,7 @@ plot_grid(p1, p2, nrow = 1)
 
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 ### Final Annotation
-combined = readRDS("Data/Seurat_Combined_DecontX_Annotated_batch2_0209.RDS")
+combined = readRDS("Data/Seurat_Combined_DecontX_Annotated_batch2.RDS")
 DimPlot(combined, label = T)
 
 annot.table = data.frame(seurat_clusters = c(0:13),

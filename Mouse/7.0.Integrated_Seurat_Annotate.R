@@ -6,7 +6,7 @@ library(dplyr)
 library(cowplot)
 library(writexl)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_SingleR_0215.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_SingleR.RDS")
 DimPlot(combined, label = T) # seurat_clusters resolution 0.7
 
 DefaultAssay(combined) = "RNA"

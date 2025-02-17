@@ -6,7 +6,7 @@ library(dplyr)
 library(harmony)
 library(cowplot)
 
-fs.list = readRDS('Seurat_Individual_DecontX_0511.RDS')
+fs.list = readRDS('Seurat_Individual_DecontX.RDS')
 
 # ## Basic merge
 # merged <- Reduce(merge, fs.list)
@@ -58,7 +58,7 @@ combined <- RunUMAP(combined, reduction = "pca", dims = 1:5)
 combined <- FindNeighbors(combined, reduction = "pca", dims = 1:5)
 combined <- FindClusters(combined, resolution = 0.5)
 
-saveRDS(combined, "Data/data_combined_DecontX_Sampled_0620.RDS")
+saveRDS(combined, "Data/data_combined_DecontX_Sampled.RDS")
 
 ## DimPlot
 

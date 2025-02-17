@@ -6,17 +6,13 @@ library(ggplot2)
 library(cowplot)
 library(RColorBrewer)
 library(readxl)
-source("~/Dropbox/CodeShareHub/EnrichmentPlot/run_enrichment_v8_GOBP.R") # GOBP
+source("run_enrichment_v8_GOBP.R") # GOBP
 
 ############## ROSMAP - Endothelial ###############
 
 filename = "DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi"
-# filename = "DESeq2_Pseudobulk_Endothelial_CERAD_cov.age_death.pmi"
 
 df = read_excel(paste0("Tables/ROSMAP/", filename, ".xlsx"))
-
-# df = read_excel("Tables/ROSMAP/DESeq2_Pseudobulk_capEndo_Diagnosis_cov.age_death.pmi.xlsx")
-# filename = "DESeq2_Pseudobulk_capEndo_Diagnosis_cov.age_death.pmi"
 
 res = run_all(df, 
               organism = 'human', 
@@ -80,7 +76,6 @@ ggsave(last_plot(), filename = "GSEA_EnrichmentPlot_Endo_DEG_240503.pdf",
 ############## ROSMAP - DV4 ANG2 High vs. Low ###############
 
 filename = "DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi"
-# filename = "DESeq2_Pseudobulk_Endothelial_CERAD_cov.age_death.pmi"
 
 fs <- list.files('Tables/ROSMAP/DESeq2_Pseudo_ANG2_Group_AD/', recursive = T)
 fs1 = fs[grepl("ANG2_High_vs_Low", fs)]

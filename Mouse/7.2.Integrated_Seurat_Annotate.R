@@ -6,7 +6,7 @@ library(dplyr)
 library(cowplot)
 library(writexl)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0219.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 DimPlot(combined, label = T)
 DimPlot(combined, group = "seurat_clusters", label = T)
 
@@ -74,7 +74,7 @@ combined = SetIdent(combined, value = "final_annot")
 
 ## 240827 update.
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0519.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 combined$final_annot = as.character(combined$final_annot)
 combined$final_annot = ifelse(combined$final_annot == "Endo", "Vascular", combined$final_annot)
 
@@ -94,25 +94,25 @@ combined = SetIdent(combined, value = "final_annot")
 
 p = DimPlot(combined, group.by = "final_annot", cols = my_cols, label = T)
 
-# saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0519.RDS")
-saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0827.RDS")
+# saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
+saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 
-ggsave("Figures/ANGPT2_AD/DimPlot_Seurat_Integrated_DecontX_Edit_DraftAnnot_0827.pdf", p, width = 6, height = 4.5)
+ggsave("Figures/ANGPT2_AD/DimPlot_Seurat_Integrated_DecontX_Edit_DraftAnnot.pdf", p, width = 6, height = 4.5)
 
 ### Visualization
 
 
 
 d = FindAllMarkers(combined, logfc.threshold = 0.25, min.pct = 0.1, only.pos = TRUE)
-write_xlsx(d, path = "Tables/FindAllMarkers_Seurat_Integated_by_final_annot_0519.xlsx", col_names = TRUE)
+write_xlsx(d, path = "Tables/FindAllMarkers_Seurat_Integated_by_final_annot.xlsx", col_names = TRUE)
 
 p = FeaturePlot(combined, features = c("Satb2", "Tbr1", "Shisa6", "Epha6", "Slc17a6", "Tcf7l2", "Adarb2", "Lhx6", "Meis2", "Ebf1", 
                                    "Ttr", "Dkk3", "Foxj1", "Pifo", "Pdgfra", "Gli3", "Gjc3", "Inpp5d", "Adgrl4"), ncol = 5, raster = TRUE)
 
-ggsave("Figures/ANGPT2_AD/FeaturePlot_Seurat_Integrated_DecontX_Edit_DraftAnnot_raster_1118.pdf", p, width = 16, height = 12)
+ggsave("Figures/ANGPT2_AD/FeaturePlot_Seurat_Integrated_DecontX_Edit_DraftAnnot_raster.pdf", p, width = 16, height = 12)
 
 p = FeaturePlot(combined, features = c("Satb2", "Tbr1", "Shisa6", "Epha6", "Slc17a6", "Tcf7l2", "Adarb2", "Lhx6", "Meis2", "Ebf1", 
                                        "Ttr", "Dkk3", "Foxj1", "Pifo", "Pdgfra", "Gli3", "Gjc3", "Inpp5d", "Adgrl4"), ncol = 5, raster = FALSE)
 
-ggsave("Figures/ANGPT2_AD/FeaturePlot_Seurat_Integrated_DecontX_Edit_DraftAnnot_1118.pdf", p, width = 16, height = 12)
+ggsave("Figures/ANGPT2_AD/FeaturePlot_Seurat_Integrated_DecontX_Edit_DraftAnnot.pdf", p, width = 16, height = 12)
 

@@ -7,7 +7,7 @@ library(harmony)
 library(wesanderson)
 library(cowplot)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_AllBatch_0212.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_AllBatch.RDS")
 DimPlot(combined, label = T)
 
 ## Add 0.7 resolution
@@ -100,6 +100,6 @@ p_split = DimPlot(combined, split.by = "celltype", ncol = 5, label = TRUE)
 ggsave(p_split, file = "Figures/DimPlot_Seurat_Integrated_DecontX_AllBatch_SingleR_Split.pdf",
        width = 12.5, height = 7.5)
 
-saveRDS(combined, "Data/Seurat_Integrated_DecontX_AllBatch_Edit_0213.RDS")
+saveRDS(combined, "Data/Seurat_Integrated_DecontX_AllBatch_Edit.RDS")
 
 

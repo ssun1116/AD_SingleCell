@@ -5,7 +5,6 @@ library(dplyr)
 library(cowplot)
 library(ggplot2)
 library(SingleCellExperiment)
-setwd("~/Dropbox/ANGPT2_AD_v2/")
 
 #### 
 EL05_gex = Read10X(data.dir = "Data/Rawdata/EL05/cellranger/EL05_cellranger_count_outs/filtered_feature_bc_matrix/")
@@ -83,5 +82,5 @@ seurat.object.list[["EL05"]] = EL05
 seurat.object.list[["EL07"]] = EL07
 seurat.object.list[["EL08"]] = EL08
 
-saveRDS(seurat.object.list, "Data/SeuratList_Individual_DecontX_batch2_0209.RDS")
+saveRDS(seurat.object.list, "Data/SeuratList_Individual_DecontX_batch2.RDS")
 

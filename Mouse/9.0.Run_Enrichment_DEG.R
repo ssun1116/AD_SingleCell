@@ -3,10 +3,9 @@ library(readxl)
 library(dplyr)
 library(annotate)
 library(ggplot2)
-setwd("~/Dropbox/ANGPT2_AD_v2")
-source("~/Dropbox/CodeShareHub/EnrichmentPlot/run_enrichment_v4.3_GOBP.R")
+source("run_enrichment_v4.3_GOBP.R")
 
-df_mast = readRDS("Data/DEG_Condition_Mast_Latent_BindList_240219.RDS")
+df_mast = readRDS("Data/DEG_Condition_Mast_Latent_BindList.RDS")
 colnames(df_mast) 
 # [1] "celltype"   "p_val"      "avg_log2FC" "pct.1"      "pct.2"      "p_val_adj"  "gene_name" 
 

@@ -6,11 +6,11 @@ library(dplyr)
 library(harmony)
 library(cowplot)
 
-combined_batch1 = readRDS("Data/Seurat_Combined_DecontX_Annotated_final_batch1_0212.RDS")
+combined_batch1 = readRDS("Data/Seurat_Combined_DecontX_Annotated_final_batch1.RDS")
 combined_batch1$batch = "Batch1"
 combined_batch1$orig.ident_batch = paste(combined_batch1$orig.ident, combined_batch1$batch, sep = "_")
 
-combined_batch2 = readRDS('Data/Seurat_Combined_DecontX_Annotated_final_batch2_0212.RDS')
+combined_batch2 = readRDS('Data/Seurat_Combined_DecontX_Annotated_final_batch2.RDS')
 combined_batch2$batch = "Batch2"
 combined_batch2$orig.ident_batch = paste(combined_batch2$orig.ident, combined_batch2$batch, sep = "_")
 
@@ -40,7 +40,7 @@ DimPlot(combined, label = TRUE, pt.size = .1)
 # combined <- FindNeighbors(combined, reduction = "pca", dims = 1:5)
 # combined <- FindClusters(combined, resolution = 0.5)
 
-saveRDS(combined, "Data/Seurat_Integrated_DecontX_AllBatch_0212.RDS")
+saveRDS(combined, "Data/Seurat_Integrated_DecontX_AllBatch.RDS")
 
 ## DimPlot
 p1 = DimPlot(combined, label = TRUE, pt.size = .1)

@@ -8,9 +8,8 @@ library(cowplot)
 library(scRNAseq)
 library(scuttle)
 library(SingleR)
-setwd("~/Dropbox/ANGPT2_AD_v2/")
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_AllBatch_Edit_0213.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_AllBatch_Edit.RDS")
 combined.se = as.SingleCellExperiment(combined)
 
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
@@ -57,4 +56,4 @@ p_2 = plot_grid(p4, p1, rel_widths = c(1.25, 1))
 p = plot_grid(p_1, p_2, ncol = 1)
 ggsave(p, file = "Figures/DimPlot_Seurat_Integrated_SingleR_Result.pdf", width = 14, height = 10)
 
-saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_SingleR_0215.RDS")
+saveRDS(combined, "Data/Seurat_Integrated_DecontX_Edit_SingleR.RDS")

@@ -7,7 +7,7 @@ library(cowplot)
 library(ggrastr)
 library(writexl)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0219.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 DimPlot(combined, label = T)
 
 combined = subset(combined, subset = celltype != "Low-quality")
@@ -79,7 +79,7 @@ deg.list2 <- lapply(deg.list, set_gene_name) # Convert rowname to gene_name colu
 df = bind_rows(deg.list2, .id = "celltype")
 rownames(df) = 1:nrow(df)
 
-saveRDS(df, "Data/DEG_Condition_Wilcoxon_BindList_240219.RDS")
+saveRDS(df, "Data/DEG_Condition_Wilcoxon_BindList.RDS")
 
 
 ## MAST: Use latent vars
@@ -97,7 +97,7 @@ deg.list_mast2 <- lapply(deg.list_mast, set_gene_name)
 df_mast = bind_rows(deg.list_mast2, .id = "celltype")
 rownames(df_mast) = 1:nrow(df_mast)
 
-saveRDS(df_mast, "Data/DEG_Condition_Mast_Latent_BindList_240219.RDS")
+saveRDS(df_mast, "Data/DEG_Condition_Mast_Latent_BindList.RDS")
 
 
 # ## LR: Use latent vars
@@ -163,7 +163,7 @@ for (celltypes in unique(combined$celltype)){
                                  "Down" = "#3182bd", 
                                  "None" = "grey"))
   
-  ggsave(p, filename = paste0("Figures/DEG_BasicWilcoxon_Test_vs_Control_", celltypes, "_240220.pdf"),
+  ggsave(p, filename = paste0("Figures/DEG_BasicWilcoxon_Test_vs_Control_", celltypes, ".pdf"),
          width = 6, height = 4.5)
   
 }
@@ -209,7 +209,7 @@ for (celltypes in unique(combined$celltype)){
                                  "Down" = "#3182bd", 
                                  "None" = "grey"))
   
-  ggsave(p, filename = paste0("Figures/DEG_Mast_Latent_Test_vs_Control_", celltypes, "_240220.pdf"),
+  ggsave(p, filename = paste0("Figures/DEG_Mast_Latent_Test_vs_Control_", celltypes, ".pdf"),
          width = 6, height = 4.5)
   
 }
@@ -293,7 +293,7 @@ for (celltypes in unique(combined$celltype)){
                                  "None" = "grey"))
   
   p = plot_grid(p1, p2)
-  ggsave(p, filename = paste0("Figures/DEG_PlotMerged_Test_vs_Control_", celltypes, "_240220.pdf"),
+  ggsave(p, filename = paste0("Figures/DEG_PlotMerged_Test_vs_Control_", celltypes, ".pdf"),
          width = 12, height = 4.5)
   
   print(paste0(celltypes, " Basic Up: ", nrow(res1[res1$Change == "Up",]), 

@@ -6,7 +6,7 @@ library(dplyr)
 library(cowplot)
 library(writexl)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0219.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 
 # Multiplot code
 plot_multi <- function(obj = obj, gene = gene, group = "final_annot"){

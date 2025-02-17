@@ -6,7 +6,7 @@ library(dplyr)
 library(harmony)
 library(cowplot)
 
-fs.list = readRDS('Data/SeuratList_Individual_DecontX_batch2_0209.RDS')
+fs.list = readRDS('Data/SeuratList_Individual_DecontX_batch2.RDS')
 
 # ## Basic merge
 # merged <- Reduce(merge, fs.list)

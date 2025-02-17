@@ -7,14 +7,14 @@ library(readxl)
 library(writexl)
 
 ## Tables
-d1_up = read_excel("Tables/Share/cluster_Ext (Cortex)_enrichment_result_0519 EL.xlsx", sheet = 1)
-d1_dn = read_excel("Tables/Share/cluster_Ext (Cortex)_enrichment_result_0519 EL.xlsx", sheet = 2)
+d1_up = read_excel("Tables/Share/cluster_Ext (Cortex)_enrichment_result_EL.xlsx", sheet = 1)
+d1_dn = read_excel("Tables/Share/cluster_Ext (Cortex)_enrichment_result_EL.xlsx", sheet = 2)
 
-d2_up = read_excel("Tables/Share/cluster_Astro_enrichment_result_0519 EL.xlsx", sheet = 1)
-d2_dn = read_excel("Tables/Share/cluster_Astro_enrichment_result_0519 EL.xlsx", sheet = 2)
+d2_up = read_excel("Tables/Share/cluster_Astro_enrichment_result_EL.xlsx", sheet = 1)
+d2_dn = read_excel("Tables/Share/cluster_Astro_enrichment_result_EL.xlsx", sheet = 2)
 
-d3_up = read_excel("Tables/Share/cluster_Micro_enrichment_result_0519 EL.xlsx", sheet = 1)
-d3_dn = read_excel("Tables/Share/cluster_Micro_enrichment_result_0519 EL.xlsx", sheet = 2)
+d3_up = read_excel("Tables/Share/cluster_Micro_enrichment_result_EL.xlsx", sheet = 1)
+d3_dn = read_excel("Tables/Share/cluster_Micro_enrichment_result_EL.xlsx", sheet = 2)
 
 ## Terms
 d1_up_term = c("neuron projection morphogenesis", "cell morphogenesis involved in neuron differentiation", "synaptic signaling", 
@@ -107,7 +107,7 @@ p1.2 = ggplot(d1_dn_sub, aes(x = reorder(Description_ID, -p.adjust), y = -log10(
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
 p1 = plot_grid(p1.1, p1.2, nrow = 1)
-ggsave(plot = p1, filename = "Figures/Plot_cluster_Ext (Cortex)_enrichment_result_0519 EL.pdf", width = 15, height = 5)
+ggsave(plot = p1, filename = "Figures/Plot_cluster_Ext (Cortex)_enrichment_result_EL.pdf", width = 15, height = 5)
 
 ## Astrocyte
 
@@ -158,7 +158,7 @@ p2.2 = ggplot(d2_dn_sub, aes(x = reorder(Description_ID, -p.adjust), y = -log10(
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
 p2 = plot_grid(p2.1, p2.2, nrow = 1)
-ggsave(plot = p2, filename = "Figures/Plot_cluster_Astrocyte_enrichment_result_0519 EL.pdf", width = 15, height = 4)
+ggsave(plot = p2, filename = "Figures/Plot_cluster_Astrocyte_enrichment_result_EL.pdf", width = 15, height = 4)
 
 ## Microglia
 
@@ -209,7 +209,7 @@ p3.2 = ggplot(d3_dn_sub, aes(x = reorder(Description_ID, -p.adjust), y = -log10(
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
 p3 = plot_grid(p3.1, p3.2, nrow = 1)
-ggsave(plot = p3, filename = "Figures/Plot_cluster_Microglia_enrichment_result_0519 EL.pdf", width = 15, height = 4)
+ggsave(plot = p3, filename = "Figures/Plot_cluster_Microglia_enrichment_result_EL.pdf", width = 15, height = 4)
 
 
 

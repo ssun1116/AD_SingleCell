@@ -82,8 +82,8 @@ p4 = DimPlot(combined, group.by = "predicted.id", label = TRUE, pt.size = .1) + 
 # ggsave(p3, file = "Seurat_integrate_DecontX_Annotated_Tasic.pdf", width = 7, height = 5)
 # ggsave(p4, file = "Seurat_integrate_DecontX_Annotated_Allen.pdf", width = 7, height = 5)
 
-saveRDS(combined, "Data/data_combined_DecontX_Annotated_0511.RDS")
-combined = readRDS("Data/data_combined_DecontX_Annotated_0511.RDS")
+saveRDS(combined, "Data/data_combined_DecontX_Annotated.RDS")
+combined = readRDS("Data/data_combined_DecontX_Annotated.RDS")
 
 ggplot(combined@meta.data, aes(x=seurat_clusters, fill=ziesel)) + 
   geom_bar(position = "fill", color = "black") +

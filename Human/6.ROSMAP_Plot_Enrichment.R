@@ -12,8 +12,8 @@ df_lin1 = read_excel("enrichment_result.xlsx", sheet = 2)
 df_lin2 = read_excel("enrichment_result.xlsx", sheet = 7)
 
 
-df_lin1 = read_excel("~/Downloads/Enrichment_DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi EL final 20241011.xlsx", sheet = 1)
-df_lin2 = read_excel("~/Downloads/Enrichment_DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi EL final 20241011.xlsx", sheet = 2)
+df_lin1 = read_excel("Enrichment_DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi.xlsx", sheet = 1)
+df_lin2 = read_excel("Enrichment_DESeq2_Pseudobulk_Endothelial_Diagnosis_cov.age_death.pmi.xlsx", sheet = 2)
 
 
 lin1 = c(
@@ -120,13 +120,13 @@ p3 = ggplot(df_lin3_select, aes(x = reorder(Description_ID, -p.adjust), y = -log
 
 
 p = plot_grid(p1, p2,  nrow = 1)
-ggsave(p, filename = "~/Desktop/GO_Analysis.pdf", width = 10, height = 3)
+ggsave(p, filename = "GO_Analysis.pdf", width = 10, height = 3)
 
 ########
 
-df_lin1 = read_excel("~/Dropbox/NormalAtlas/GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 1)
-df_lin2 = read_excel("~/Dropbox/NormalAtlas/GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 2)
-df_lin3 = read_excel("~/Dropbox/NormalAtlas/GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 3)
+df_lin1 = read_excel("GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 1)
+df_lin2 = read_excel("GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 2)
+df_lin3 = read_excel("/GO_Analysis_Lineages_All_under_20_lineage2_time_wilcoxon_1000.xlsx", sheet = 3)
 
 lin1 = c(
   "chemical synaptic transmission",

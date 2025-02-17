@@ -10,10 +10,10 @@ library(Seurat)
 library(writexl)
 library(readxl)
 library(anndata)
-setwd("/data1/ROSMAP/")
+
 
 ## Logcount mean - ANGPT2 grouping 
-ad <- anndata::read_h5ad('Data/Pseudobulk_ROSMAP2_logcount_mean_0206.h5ad')
+ad <- anndata::read_h5ad('Data/Pseudobulk_ROSMAP2_logcount_mean.h5ad')
 ad.raw = as.data.frame(ad$X)
 ad.mtx = ad.raw %>% t()
 ad.meta = as.data.frame(ad$obs)
@@ -37,7 +37,7 @@ ad.raw_endo$sampleID = sapply(strsplit(as.character(ad.raw_endo$sample),'_'), "[
 ad.raw_endo$sample <- NULL
 
 ## Raw count data
-ad <- anndata::read_h5ad('Data/Pseudobulk_ROSMAP2_count_sum_0206.h5ad')
+ad <- anndata::read_h5ad('Data/Pseudobulk_ROSMAP2_count_sum.h5ad')
 ad.raw = as.data.frame(ad$X)
 ad.mtx = ad.raw %>% t()
 ad.meta = as.data.frame(ad$obs)

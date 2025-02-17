@@ -8,7 +8,7 @@ library(ggrastr)
 library(writexl)
 library(ggrepel)
 
-combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot_0519.RDS")
+combined = readRDS("Data/Seurat_Integrated_DecontX_Edit_DraftAnnot.RDS")
 DimPlot(combined, label = T)
 
 ## Barplot - Sample proportion
@@ -50,7 +50,7 @@ p2 = ggplot(combined@meta.data, aes(x=final_annot, fill=cond.sex.batch)) +
         plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
 p = plot_grid(p1, p2, rel_widths = c(0.9, 1))
-ggsave(p, file = "Figures/BarPlot_Seurat_Integrated_DraftAnnot_Cluster_Proportion_0519.pdf", width = 15, height = 4)
+ggsave(p, file = "Figures/BarPlot_Seurat_Integrated_DraftAnnot_Cluster_Proportion.pdf", width = 15, height = 4)
 
 
 
@@ -80,7 +80,7 @@ deg.list_mast2 <- lapply(deg.list_mast, set_gene_name)
 df_mast = bind_rows(deg.list_mast2, .id = "celltype")
 rownames(df_mast) = 1:nrow(df_mast)
 
-saveRDS(df_mast, "Data/DEG_Condition_Mast_Latent_BindList_240519.RDS")
+saveRDS(df_mast, "Data/DEG_Condition_Mast_Latent_BindList.RDS")
 
 
 ## LR: Use latent vars
@@ -98,7 +98,7 @@ deg.list_LR2 <- lapply(deg.list_LR, set_gene_name)
 df_LR = bind_rows(deg.list_LR2, .id = "celltype")
 rownames(df_LR) = 1:nrow(df_LR)
 
-saveRDS(df_LR, "Data/DEG_Condition_LR_Latent_BindList_240519.RDS")
+saveRDS(df_LR, "Data/DEG_Condition_LR_Latent_BindList.RDS")
 
 
 ######################################################
@@ -144,7 +144,7 @@ for (celltypes in unique(combined$final_annot)){
                                  "Down" = "#3182bd", 
                                  "None" = "grey"))
   
-  ggsave(p, filename = paste0("Figures/DEG_Mast_Latent_Test_vs_Control_", celltypes, "_240519.pdf"),
+  ggsave(p, filename = paste0("Figures/DEG_Mast_Latent_Test_vs_Control_", celltypes, ".pdf"),
          width = 6, height = 4.5)
   
 }
@@ -189,7 +189,7 @@ for (celltypes in unique(combined$final_annot)){
                                  "Down" = "#3182bd", 
                                  "None" = "grey"))
   
-  ggsave(p, filename = paste0("Figures/DEG_LR_Latent_Test_vs_Control_", celltypes, "_240519.pdf"),
+  ggsave(p, filename = paste0("Figures/DEG_LR_Latent_Test_vs_Control_", celltypes, ".pdf"),
          width = 6, height = 4.5)
   
 }
